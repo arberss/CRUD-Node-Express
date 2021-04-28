@@ -1,0 +1,44 @@
+<%- include('./includes/head.ejs') %>
+
+    <% if(locals.error!=='' ) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= error %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        <% } %>
+
+            <form action="/<% if (editing) { %>edit-book<% } else { %>add-book<% } %>  " id='book-form' method="POST">
+                <div class='form-group text-left'>
+                    <label htmlFor='title'>Title</label>
+
+                    <input name='title' type='text' class='form-control'
+                        value="<% if (editing) { %><%= book.title %><% } %>" />
+                </div>
+                <div class='form-group text-left'>
+                    <label htmlFor='author'>Author</label>
+
+                    <input name='author' type='text' class='form-control'
+                        value="<% if (editing) { %><%= book.author %><% } %>" />
+                </div>
+                <div class='form-group text-left'>
+                    <label htmlFor='yop'>Year of Publish</label>
+
+                    <input name='yop' type='text' class='form-control'
+                        value="<% if (editing) { %><%= book.yop %><% } %>" />
+                </div>
+
+                <div class="buttons d-flex justify-content-center">
+                    <a href="/" class="btn btn-info d-block mr-3  w-20">Back</a>
+
+                    <% if (editing) { %>
+                        <input type="hidden" value="<%= book._id %>" name="bookId">
+                        <% }%>
+                            <button type='submit' id="submitbtn" class="btn btn-success d-block  w-20">
+                                <% if (editing) { %>Update Book<% } else { %>Add Book <% } %>
+                            </button>
+                </div>
+            </form>
+
+            <%- include('./includes/footer.ejs') %>
